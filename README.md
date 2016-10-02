@@ -34,7 +34,7 @@ Para testar se a instalação foi um sucesso:
 java -version ou javac -version
 ```
 
-**Servider SSH**
+**Servidor SSH**
 ```
 apt-get install ssh
 ```
