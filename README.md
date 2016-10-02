@@ -25,13 +25,18 @@ Atualização dos repositórios:
 ```
 apt-get update
 ```
-Instalação do Jada JDK 8:
+Instalação do Java JDK 8:
 ```
 apt-get install oracle-java8-installer
 ```
 Para testar se a instalação foi um sucesso:
 ```
 java -version ou javac -version
+```
+
+**Servider SSH**
+```
+apt-get install ssh
 ```
 
 **Apache Hadoop**
