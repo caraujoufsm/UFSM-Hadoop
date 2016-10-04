@@ -4,7 +4,7 @@ O projeto consiste na utilização do paradigma MapReduce para a implementação
 Para conseguir executar os arquivos do projeto, é necessário alguma versão do Java Development Kit (recomenda-se o 8) e Hadoop, que é uma plataforma de computação distribuída para processamento de grandes quantidades de dados.
 
 ## Instalação das Ferramentas
-Todos os comandos listados aqui foram executados no Debian 8 (Jessie), deve funcionar funcionar sem mais problemas em distribuições derivadas.
+Todos os comandos listados aqui foram executados no Debian 8 (Jessie), os mesmos devem funcionar sem mais problemas em distribuições derivadas.
 
 **Java Development Kit**
 
@@ -35,6 +35,7 @@ java -version ou javac -version
 ```
 
 **Servidor SSH**
+Instalar o ssh
 ```
 apt-get install ssh
 ```
@@ -53,7 +54,7 @@ ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
 ```
-Para adicionar o localhost, na área dos hosts conhecidos, fazer login via ssh da seguinte maneira:
+Para adicionar o localhost, na área dos hosts conhecidos pelo ssh, fazer login via ssh da seguinte maneira:
 ```
 ssh localhost
 exit (para sair)
@@ -72,12 +73,13 @@ Para concluir o download, só seguir com as instruções recomdadas pela próxim
 
 Com a conclusão do download, mover o pacote para o diretório raiz do usuário hadoop.
 
-Para extrair o pacote e renomer a pasta recém extraída.
+Para extrair o pacote e renomer a pasta recém extraída:
 ```
 tar -zxvf hadoop-2.7.3.tar.gz
 mv hadoop-2.7.3.tar.gz hadoop
 ```
-Agora, se faz necessário customizar alguns dos arquivos recefentes a configuraçao do hadoop.
+Agora, se faz necessário customizar alguns dos arquivos referentes à configuração do hadoop.
+
 Para começar, vamos editar o ~/.bashrc e adicinar os campos:
 ```
 export HADOOP_HOME=/home/hadoop/hadoop
@@ -91,7 +93,7 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
 ```
-Agora vamos editar o ~/hadoop/etc/hadoop/hadoop-env.sh. Precimos alterar o campo "export JAVA_HOME" para:
+Agora vamos editar o ~/hadoop/etc/hadoop/hadoop-env.sh. Precisamos alterar o campo "export JAVA_HOME" para:
 ```
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 ```
@@ -141,7 +143,7 @@ Para testar o funcionamento da instalação, executar os comandos abaixo e acess
 start-dfs.sh
 start-yarn.sh
 ```
-Para parar os data node e name nome:
+Para parar os datanode e namenode:
 ```
 stop-yarn.sh
 stop-dfs.sh
@@ -156,16 +158,17 @@ Compilando o arquivo e gerando seu .jar:
 hadoop com.sun.tools.javac.Main WordCount.java
 jar cf wc.jar WordCount*.class
 ```
-Agora, partiremos do principio que:
+Agora, partiremos do princípio que:
 - **Input da app**: /hadoop/tmp.txt;
-- **Output da app**: /hadoop/tmpResult;
-Ambos diretórios se encontram no HDFS
+- **Output da app**: /hadoop/tmpResult.
+
+Ambos os diretórios se encontram no HDFS
 
 Executando o .jar:
 ```
 hadoop jar wc.jar WordCount /hadoop/tmp.txt /hadoop/tmpResult
 ```
-Verificando o resultado
+Verificando o resultado:
 ```
 hadoop fs -cat /hadoop/tmpResult/part-r-00000
 ```
