@@ -1,4 +1,4 @@
-# Instalação Apache Hadoop
+# Instalação do Apache Hadoop
 
 Hadoop é uma plataforma de computação distribuída para o processamento de grandes quantidades de dados. É um projeto open-source do Apache que contam com uma grande quantidade de contribuidores.
 
