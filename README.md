@@ -46,7 +46,7 @@ apt-get install ssh
 
 É aconselhável criar um usuário para o hadoop. Como root, execute:
 ```
-addser hadoop
+adduser hadoop
 ```
 Defina a senha para seu usuário.
 
