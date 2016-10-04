@@ -146,3 +146,5 @@ Para parar os data node e name nome:
 stop-yarn.sh
 stop-dfs.sh
 ```
+
+## Execução de uma aplicação Teste
