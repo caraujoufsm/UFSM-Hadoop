@@ -1,7 +1,7 @@
 # Projeto Ozone
 O projeto consiste na utilização do paradigma MapReduce para a implementação de algoritmos para manipulação de dados a partir de satélites de monitoramento climático. Trata-se de um grande volume dados, os quais devem ser extraídos e tratados. Dentre as métricas a serem implementadas destacam-se média aritmética, valores mínimo e máximo e desvio padrão. Os algoritmos implementados preveem a necessidade de seleção de intervalos de tempo e de espaço para a extração de amostras e/ou dados específicos de uma dada região.
 
-Para conseguir executar os arquivos do projeto, é necessário alguma versão do Java Development Kit (recomenda-se o 8) e Hadoop, que é uma plataforma de computação distribuída para processamento de grandes quantidades de dados.
+Para conseguir executar os arquivos do projeto, é necessário alguma versão do Java Development Kit (recomenda-se o 8), o Hadoop, que é uma plataforma de computação distribuída para processamento de grandes quantidades de dados e um servidor SSH.
 
 ## Instalação das Ferramentas
 Todos os comandos listados aqui foram executados no Debian 8 (Jessie), os mesmos devem funcionar sem mais problemas em distribuições derivadas.
@@ -35,6 +35,7 @@ java -version ou javac -version
 ```
 
 **Servidor SSH**
+
 Instalar o ssh
 ```
 apt-get install ssh
