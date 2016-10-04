@@ -40,3 +40,107 @@ apt-get install ssh
 ```
 
 **Apache Hadoop**
+
+É aconselhável criar um usuário para o hadoop. Como root, execute:
+```
+addser hadoop
+```
+Defina a senha para seu usuário.
+
+Após criar o usuário para a ferramenta, fazer login via terminal com o usuário para podermos entrar com as permissões do servidor ssh.
+```
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 0600 ~/.ssh/authorized_keys
+```
+Para adicionar o localhost, na área dos hosts conhecidos, fazer login via ssh da seguinte maneira:
+```
+ssh localhost
+exit (para sair)
+```
+Após isso, acessar (http://hadoop.apache.org/), deslocar-se até o tópico "Getting Started" e clicar em downloads como na imagem a seguir:
+
+![Imagem 1](images/img_1.png)
+
+Você será redirecionado para a página de download. Com isso, é recomendável que seja feito o download do pacote "binary" da versão estável mais atual disponível. Na imagem exemplo, é a versão 2.7.3.
+
+![Imagem 2](images/img_2.png)
+
+Para concluir o download, só seguir com as instruções recomdadas pela próxima página.
+
+![Imagem 3](images/img_3.png)
+
+Com a conclusão do download, mover o pacote para o diretório raiz do usuário hadoop.
+
+Para extrair o pacote e renomer a pasta recém extraída.
+```
+tar -zxvf hadoop-2.7.3.tar.gz
+mv hadoop-2.7.3.tar.gz hadoop
+```
+Agora, se faz necessário customizar alguns dos arquivos recefentes a configuraçao do hadoop.
+Para começar, vamos editar o ~/.bashrc e adicinar os campos:
+```
+export HADOOP_HOME=/home/hadoop/hadoop //path where install
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+```
+Agora vamos editar o ~/hadoop/etc/hadoop/hadoop-env.sh. Precimos alterar o campo "export JAVA_HOME" para:
+```
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+```
+Editar o ~/hadoop/etc/hadoop/core-site.xml:
+```
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
+```
+Editar o hadoop/etc/hadoop/hdfs-site.xml:
+```
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>
+```
+Editar o hadoop/etc/hadoop/mapred-site.xml.template
+```
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+</configuration>
+```
+Editar o hadoop/etc/hadoop/yarn-site.xml:
+```
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+</configuration>
+```
+Agora, é necessário formatar o namenode:
+```
+cd ~
+hdfs namenoe -format
+```
+Para testar o funcionamento da instalação, executar os comandos abaixo e acessar (http://127.0.0.1:50070):
+```
+start-dfs.sh
+start-yarn.sh
+```
+Para parar os data node e name nome:
+```
+stop-yarn.sh
+stop-dfs.sh
+```
