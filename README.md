@@ -172,5 +172,5 @@ hadoop fs -cat /hadoop/tmpResult/part-r-00000
 
 Caso todo o processo tenha sido realizado com sucesso, deve haver uma saída condizente com a entrada teste.
 
-## Referências
+### Referências
 (https://hadoop.apache.org/docs/r2.7.2/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Example:_WordCount_v2.0)
