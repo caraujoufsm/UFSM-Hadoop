@@ -159,6 +159,7 @@ jar cf wc.jar WordCount*.class
 Agora, partiremos do principio que:
 - **Input da app**: /hadoop/tmp.txt;
 - **Output da app**: /hadoop/tmpResult;
+Ambos diretórios se encontram no HDFS
 
 Executando o .jar:
 ```
