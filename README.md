@@ -80,7 +80,8 @@ mv hadoop-2.7.3.tar.gz hadoop
 Agora, se faz necessário customizar alguns dos arquivos recefentes a configuraçao do hadoop.
 Para começar, vamos editar o ~/.bashrc e adicinar os campos:
 ```
-export HADOOP_HOME=/home/hadoop/hadoop //path where install
+export HADOOP_HOME=/home/hadoop/hadoop
+export HADOOP_CLASSPATH=/usr/lib/jvm/java-8-oracle/lib/tools.jar
 export HADOOP_INSTALL=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
 export HADOOP_COMMON_HOME=$HADOOP_HOME
@@ -88,6 +89,7 @@ export HADOOP_HDFS_HOME=$HADOOP_HOME
 export YARN_HOME=$HADOOP_HOME
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
 ```
 Agora vamos editar o ~/hadoop/etc/hadoop/hadoop-env.sh. Precimos alterar o campo "export JAVA_HOME" para:
 ```
@@ -132,7 +134,7 @@ Editar o hadoop/etc/hadoop/yarn-site.xml:
 Agora, é necessário formatar o namenode:
 ```
 cd ~
-hdfs namenoe -format
+hdfs namenode -format
 ```
 Para testar o funcionamento da instalação, executar os comandos abaixo e acessar (http://127.0.0.1:50070):
 ```
