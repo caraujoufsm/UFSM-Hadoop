@@ -2,11 +2,11 @@
 
 cd
 wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz
-tar -zxfv hadoop-2.7.1.tar.gz
+tar -zxvf hadoop-2.7.1.tar.gz
 mv hadoop-2.7.1 hadoop
 
 cp ozone_proj/scripts/bash/.bashrc ~/
-cp ozone_proj/scripts/sh/hadoop-env.sh /hadoop/etc/hadoop/
-cp ozone_proj/scripts/xml/*.xml /hadoop/etc/hadoop/
+cp ozone_proj/scripts/sh/hadoop-env.sh ~/hadoop/etc/hadoop/
+cp ozone_proj/scripts/xml/*.xml ~/hadoop/etc/hadoop/
 
 source .bashrc
