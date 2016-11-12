@@ -13,7 +13,5 @@ do
 done;
 count=$(( count - 1))
 
-echo hadoop fs -copyFromLocal "$path_ori" /
-
+hadoop fs -copyFromLocal "$path_ori" /
 hadoop jar "$path_jarOri" $3 /"${path_array[$count]}" /tmpResult $5 $6 $7 $8 $4
-hadoop fs -rm -r -f /tmpResult*
