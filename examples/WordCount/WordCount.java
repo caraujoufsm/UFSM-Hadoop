@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -48,6 +49,8 @@ public class WordCount {
   }
 
   public static void main(String[] args) throws Exception {
+    TimeWatch watch = new TimeWatch();
+    watch.start();
     Configuration conf = new Configuration();
     Job job = Job.getInstance(conf, "word count");
     job.setJarByClass(WordCount.class);
@@ -58,6 +61,35 @@ public class WordCount {
     job.setOutputValueClass(IntWritable.class);
     FileInputFormat.addInputPath(job, new Path(args[0]));
     FileOutputFormat.setOutputPath(job, new Path(args[1]));
-    System.exit(job.waitForCompletion(true) ? 0 : 1);
+
+    job.waitForCompletion(true);
+    long passedTimeInMs = watch.time();
+    System.out.println("TIME IN MS: " + (passedTimeInMs / 1000.0));
+  }
+
+  public static class TimeWatch {    
+    long starts;
+
+    public static TimeWatch start() {
+        return new TimeWatch();
+    }
+
+    private TimeWatch() {
+        reset();
+    }
+
+    public TimeWatch reset() {
+        starts = System.currentTimeMillis();
+        return this;
+    }
+
+    public long time() {
+        long ends = System.currentTimeMillis();
+        return ends - starts;
+    }
+
+    public long time(TimeUnit unit) {
+        return unit.convert(time(), TimeUnit.MILLISECONDS);
+    }
   }
 }
