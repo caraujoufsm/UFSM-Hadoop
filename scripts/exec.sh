@@ -13,5 +13,12 @@ do
 done;
 count=$(( count - 1))
 
-hadoop fs -copyFromLocal "$path_ori" /
-hadoop jar "$path_jarOri" $3 /"${path_array[$count]}" /tmpResult $5 $6 $7 $8 $4
+j=0
+c=1
+while [ $j -lt 4 ];
+do
+    hadoop fs -copyFromLocal "$path_ori" /
+	hadoop jar "$path_jarOri" $3 /"${path_array[$count]}" /tmpResult $4 $5 $6 $7 $c >> $8 && hadoop fs -rm -r -f /tmpResult*
+    c=$(( c * 10  ))
+    let j=j+1
+done
