@@ -43,36 +43,29 @@ public class Ozone extends Configured implements Tool {
         conf.set("rllat",args[4]); // right-lower latitude
         conf.set("rllon",args[5]); // right-lower longitude
         
+        Job job = new Job();
 
-        int len = Integer.parseInt(args[6]);
-        Job jobs[] = new Job[len];
-
-        for(int i = 0; i < len; i++)
-        {
-        	jobs[i] = new Job(conf, "Tool Job");
-	        jobs[i].setJarByClass(Ozone.class);
-	        jobs[i].setJobName("Ozone reader");
-	        FileInputFormat.addInputPath(jobs[i], new Path(args[0]));
-	        FileOutputFormat.setOutputPath(jobs[i], new Path(args[1] + Integer.toString(i)));
-	        jobs[i].setMapperClass(OzoneFilterMapper.class);
-	        //job.setCombinerClass(OzoneCombiner.class);
-	        jobs[i].setReducerClass(OzoneAvgReducer.class);
-	        jobs[i].setMapOutputKeyClass(FloatArrayWritable.class);
-	        jobs[i].setMapOutputValueClass(IntArrayWritable.class);
-	        jobs[i].setOutputKeyClass(Text.class);
-	        jobs[i].setOutputValueClass(Text.class);
-        }        
+    	job = new Job(conf, "Tool Job");
+        job.setJarByClass(Ozone.class);
+        job.setJobName("Ozone reader");
+        FileInputFormat.addInputPath(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        job.setMapperClass(OzoneFilterMapper.class);
+        //job.setCombinerClass(OzoneCombiner.class);
+        job.setReducerClass(OzoneAvgReducer.class);
+        job.setMapOutputKeyClass(FloatArrayWritable.class);
+        job.setMapOutputValueClass(IntArrayWritable.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);     
         
         TimeWatch watch = new TimeWatch();
     	watch.start();
-    	for(int i = 0; i < len; i++){
-    		jobs[i].waitForCompletion(true);
-    	}
-    	long passedTimeInMs = watch.time();
     	System.out.println("==============================================");
-    	System.out.println("TAMANHO DO LACO: " + Integer.parseInt(args[6]));
-	    System.out.println("TIME IN SEC: " + (passedTimeInMs / 1000.0));
-	    System.out.println("==============================================");
+    	System.out.println("Arquivo " + args[0] + " :");
+		job.waitForCompletion(true);
+		long passedTimeInMs = watch.time();
+		System.out.println("TIME IN SEC: " + (passedTimeInMs / 1000.0));
+    	System.out.println("==============================================");
     	return 0;
     }
 
