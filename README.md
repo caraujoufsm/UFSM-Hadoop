@@ -153,7 +153,7 @@ stop-dfs.sh
 
 ## Execução de uma aplicação Teste
 
-Para testar o hadoop, vamos executar a aplicação presente em [WordCount](examples/WordCount.java).
+Para testar o hadoop, vamos executar a aplicação presente em [WordCount](examples/WordCount/WordCount.java).
 
 Compilando o arquivo e gerando seu .jar:
 ```
