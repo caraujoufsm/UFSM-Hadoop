@@ -78,7 +78,7 @@ Com a conclusão do download, mover o pacote para o diretório raiz do usuário 
 Para extrair o pacote e renomer a pasta recém extraída:
 ```
 tar -zxvf hadoop-2.7.3.tar.gz
-mv hadoop-2.7.3.tar.gz hadoop
+mv hadoop-2.7.3/ hadoop
 ```
 Agora, se faz necessário customizar alguns dos arquivos referentes à configuração do hadoop.
 
